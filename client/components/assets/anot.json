@@ -1,0 +1,7 @@
+{
+  "stored_counter": "nat",
+  "threshold": "nat",
+  "keys": {
+    "list": "key"
+  }
+}
