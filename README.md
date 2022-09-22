@@ -1,3 +1,3 @@
-# typescript-react-express-app
-Boilerplate code that will get you up and running on your next TypeScript application
+# Mining Mars
+A TypeScript Game application using Tezos Blockchain
 # mininingmars
