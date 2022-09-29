@@ -1,9 +1,20 @@
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
-const programmingLanguagesRouter = require("../routes/programmingLanguages");
+//import cors from "cors";
+const resourcesRouter = require("../routes/resources");
 const inventoryRouter = require("../routes/inventory");
 const app = express();
 
+//app.use(cors);
+app.use(express.urlencoded({ extended: true }));
+
+
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", (req: Request, res: Response, next: NextFunction): void => {
@@ -15,20 +26,19 @@ app.get("/", (req: Request, res: Response, next: NextFunction): void => {
     }
 });
 
-app.use("/resources", programmingLanguagesRouter);
 app.use("/inventory", inventoryRouter);
+app.use("/resources", resourcesRouter);
 
 
 /* Error handler middleware */
-/*
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const statusCode = err.statusCode || 500;
   console.error(err.message, err.stack);
   res.status(statusCode).json({ message: err.message });
   return;
-}); */ 
+}); 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

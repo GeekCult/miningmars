@@ -3,13 +3,14 @@ import React, { useEffect } from "react";
 export interface ToastProps {
   id: string;
   destroy: () => void;
+  mode: string;
   title: string;
   content: string;
   duration?: number;
 }
 
 const Toast: React.FC<ToastProps> = (props) => {
-  const { destroy, content, title, duration = 0, id } = props;
+  const { destroy, mode, content, title, duration = 0, id } = props;
 
   useEffect(() => {
     if (!duration) return;
@@ -22,7 +23,7 @@ const Toast: React.FC<ToastProps> = (props) => {
   }, [destroy, duration]);
 
   return (
-    <div>
+    <div className={mode}>
       <div className={"toast-header"}>
         <div>{title}</div>
         <button onClick={destroy}><i className="fa fa-times"></i></button>

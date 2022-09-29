@@ -16,7 +16,7 @@ export class TezosManager {
        
      
     
-    public connect = async (props): Promise<void> => {
+    public connect = async (props : any): Promise<void> => {
         
         // KT1U6EHmNxJTkvaWJ4ThczG4FSDaHC21ssvi - FXHash
         //const contractAddress: string = "KT1JfEVQj4w1aTJmg6gSHKvV2UQZAjuguemr";
@@ -25,28 +25,28 @@ export class TezosManager {
         try {
             props.Tezos.wallet
             .at(contractAddress)
-            .then((contract) => {
+            .then((contract : any) => {
               const i = 7;
 
               console.log(`Incrementing storage value by ${i}...`);
               return contract.methods.increment(i).send();
             })
-            .then((op) => {
+            .then((op : any) => {
                 console.log(`Waiting for ${op.opHash} to be confirmed...`);
                 return op.confirmation(3).then(() => op.opHash);
             })
-            .then((hash) => console.log(`Operation injected: https://ithaca.tzstats.com/${hash}`))
-            .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`)); 
+            .then((hash : any) => console.log(`Operation injected: https://ithaca.tzstats.com/${hash}`))
+            .catch((error : any) => console.log(`Error: ${JSON.stringify(error, null, 2)}`)); 
             
             
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error)
         }
         
         
     }
     
-    public inspectContract = async (props): Promise<void> => {
+    public inspectContract = async (props : any): Promise<void> => {
         
         // KT1U6EHmNxJTkvaWJ4ThczG4FSDaHC21ssvi - FXHash
         //const contractAddress: string = "KT1JfEVQj4w1aTJmg6gSHKvV2UQZAjuguemr";
@@ -57,16 +57,16 @@ export class TezosManager {
             
             props.Tezos.wallet
                 .at(contractAddress)
-                .then((c) => {
+                .then((c: any) => {
                     let methods = c.parameterSchema.ExtractSignatures();
                     message = JSON.stringify(methods, null, 2);
                 })
-                .catch((error) => message = `Error: ${error}`);
+                .catch((error: any) => message = `Error: ${error}`);
             
-            return <Modal isShown="true" hide="false" modalContent={message} headerText="Result"/>
+            //return <Modal isShown="true" hide="false" modalContent={message} headerText="Result"/>
             
         
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error)
         }
         

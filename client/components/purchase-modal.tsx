@@ -97,12 +97,12 @@ export const PurchaseModal: FunctionComponent<PurchaseModalProps> = (props) => {
         
         props.Tezos.wallet
             .at(contractAddress)
-            .then((contract) => {
+            .then((contract: any) => {
                 console.log(contract);
                 let incrementParams = contract.methods.decrement(2).toTransferParams();
                 console.log(JSON.stringify(incrementParams, null, 2));
             })
-            .catch((error) => console.log(`Error: ${error}`));
+            .catch((error: any) => console.log(`Error: ${error}`));
     }
     
     const showMethods = async (): Promise<void> => {

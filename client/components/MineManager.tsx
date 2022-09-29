@@ -1,42 +1,67 @@
 import axios, { AxiosResponse } from "axios";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import Trade from "../views/Trade";
+import Marketplace from "../views/Marketplace";
+import Inventory from "../views/Inventory";
+import { toast } from "../components/ToastManager";
+
+import { mineUtils } from "../components/MineUtils";
+
     
 export class MineManager {
+    
+    public mine = async (): Promise<AxiosResponse> => {
+             
+        const baseUrl: string = "http://localhost:3000"
+        
+        try {   
+            let nrItems = mineUtils.randomNumber(1, 5);
+            //alert(nrItems);
 
-    public mine(){
-        
-        //const baseUrl: string = "http://localhost:3000"
-        
-        let mineResult = [{title: '+1 Yellow Chicken', content: ''}, {title: '+2 Silver Spoons', content: ''}, {title: '+1 Gold', content: ''}];
-        //const article = { title: 'React POST Request Example' };
-            //axios.post(baseUrl + "/resources", article)
-               // .then(response => "done");
-        //}
-        
-        return mineResult;
-        
-        //return true;
+            const recordSet: AxiosResponse = await axios.get(
+                baseUrl + "/inventory/mine", {params: {nr: nrItems}}
+            )
+            
+            //let mineResult = [{title: '+1 Yellow Chicken', content: ''}, {title: '+2 Silver Spoons', content: ''}, {title: '+1 Gold', content: ''}];
+            
+            Object.keys(recordSet.data.data).map((d: any)=>{
+                
+                var nrQtd = mineUtils.randomNumber(1, 3);
+                
+                // Send data to the backend via POST
+                const mineResult = axios.post(baseUrl + "/resources", {'id_item': recordSet.data.data[d].id, 'id_user': 0, 'amount': nrQtd} )
+                    .then(response => { toast.show({ title: "+" + nrQtd + " " + recordSet.data.data[d].title,  content: "",  duration: 4000, mode: 'common' }); return response.data; })
+                    .catch(error => {  console.error('There was an error!', error); }); 
+                 
+            });
+            
+            //recordSet.forEach(function (value) {
+                //toast.show({ title: value.title,  content: value.value,  duration: 4000  }); 
+                //min = min + 100;
+            //}); 
+            
+            return recordSet;
+            
+        } catch (error: any) {
+            throw new Error(error);
+        }
     };
        
     public saveMine = async (): Promise<AxiosResponse> => {
         
         const baseUrl: string = "http://localhost:3000"
-        
-        //let mineResult = [{title: '+1 Yellow Chicken', content: ''}, {title: '+2 Silver Spoons', content: ''}, {title: '+1 Gold', content: ''}];
-        const article = { title: 'Super title' };
-        const response = await axios.post(baseUrl + "/resources", article, { headers: { 'Content-Type': 'application/json',  Accept: 'application/json', },)
-            .then(response => {message: "done"})
-            .catch(error => { console.error('There was an error!', error); }); 
-            
-        
-        
-        //return mineResult;
-        
-        //return true;
+        let nrItems = mineUtils.randomNumber(1, 5);
+
+        // Send data to the backend via POST
+        const mineResult = await axios.post(baseUrl + "/resources", {'id_item': 5, 'id_user': 0, 'amount': nrItems} )
+            .then(response => { toast.show({ title: "Saved test",  content: "",  duration: 4000, mode: 'success' }); return response.data; })
+            .catch(error => {  toast.show({ title: 'There was an error!' + error,  content: "",  duration: 4000, mode: 'error' }); console.error('There was an error!', error); }); 
+
+        return mineResult;
     };
      
 
-    public connect = async (props): Promise<AxiosResponse> => {
+    public connect = async (props: any): Promise<AxiosResponse> => {
         
         const baseUrl: string = "http://localhost:3000"
         
@@ -47,19 +72,22 @@ export class MineManager {
               baseUrl + "/resources"
             )
             
+            
             props.setTitleModal('Fetching Database Records');
-            props.setContentModal(Object.keys(todos.data.data).map((d)=>{ return( 
-                <div className="pp_square_bg mgB0 p-10 hover" key={todos.data.data[d].id} >
+            props.setContentModal(Object.keys(todos.data.data).map((d: any)=>{ return( 
+                <div className="pp_square_bg mgB0 p-10 hover width350" key={todos.data.data[d].id} >
                     <div className="cflx center-flex">
-                        <div className="fr1">
-                            <img src={"./imagens/" + todos.data.data[d].image} height="25"/>
+                        <div className="fr1 mgR">
+                            <img src={"./imagens/" + todos.data.data[d].image} height="40"/>
                         </div>
-                        <div className="fr4">{todos.data.data[d].title}</div> 
+                        <div className="fr3">{todos.data.data[d].title}</div> 
                         <div className="fr1">{todos.data.data[d].value}</div>
                     </div>
                 </div>) 
-            });
-
+                })
+            );
+            
+            
             //console.log(result);
             //Object.keys(todos).map(key => ( alert(todos[key].name)));
             //todos && todos.data.map((d)=>{ console.log(d.name);});
@@ -68,14 +96,54 @@ export class MineManager {
            
             return todos;
              
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error);
         }
         
         
     }
     
-    public inventory = async (props): Promise<AxiosResponse> => {
+    public inventory = async (props: any): Promise<AxiosResponse> => {
+        
+        const baseUrl: string = "http://localhost:3000"
+        
+        try {
+            
+            const items: AxiosResponse = await axios.get(
+              baseUrl + "/inventory"
+            )
+            
+            let element = document.getElementById('overScreen');
+            //alert(props.id);
+            props.setContentOverScreen(<Inventory items={items} props={props}/>);
+            element.classList.add("act");
+             
+        } catch (error: any) {
+            throw new Error(error);
+        } 
+    }
+    
+    /*
+    const tradeIt = async (props: any): Promise<AxiosResponse> => {
+        
+        let baseUrl: string = "http://localhost:3000"
+        
+        let item: AxiosResponse = await axios.get(
+            baseUrl + "/inventory/item", {params: {nr: props.id}} 
+        )
+
+        //alert('oo');
+        let element = document.getElementById('overScreen');
+        //alert(props.id);
+        props.props.setContentOverScreen(<Trade item={item.data.data}/>);
+        element.classList.add("act");
+        
+        return baseUrl;
+    }
+    
+    
+    
+    public inventoryOld = async (props: any): Promise<AxiosResponse> => {
         
         const baseUrl: string = "http://localhost:3000"
         
@@ -87,61 +155,51 @@ export class MineManager {
             )
             
             props.setTitleModal('My Inventory');
-            props.setContentModal(Object.keys(todos.data.data).map((d)=>{ return( 
+            props.setContentModal(Object.keys(todos.data.data).map((d)=>{ return(
                 <div className="pp_square_bg mgB0 p-10 hover width450" key={todos.data.data[d].id} > 
                     <div className="cflx center-flex">
                         <div className="fr1">
-                            <img src={"./imagens/" + todos.data.data[d].image} height="25"/>
+                            <img src={"./imagens/" + todos.data.data[d].image} height="40"/>
                         </div>  
-                        <div className="fr1">{todos.data.data[d].amount}</div> 
+                        <div className="fr1 center mgR"><div className="badge2">{todos.data.data[d].amount} x</div></div> 
                         <div className="fr4">{todos.data.data[d].title}</div> 
-                        <div className="fr1"><button className="btn btn-main btn-sm">Trade</button></div>
+                        <div className="fr1"><button className="btn btn-main btn-sm" onClick={() => { this.tradeIt({id: todos.data.data[d].id, props: props});   }} >Trade</button></div>
                     </div>
-                </div>) });
+                </div>
+                ) })
+                );
 
-            //console.log(result);
-            //Object.keys(todos).map(key => ( alert(todos[key].name)));
-            //todos && todos.data.map((d)=>{ console.log(d.name);});
-            
             props.toggle();
             
-
-            return todos; 
-        } catch (error) {
+            return todos;
+             
+        } catch (error: any) {
             throw new Error(error);
-        }
-        
-        
-    }
+        } 
+    } */
     
-    //public connectWebSocket(){  
-        
-        
-       
-            //const WebSocket = require('isomorphic-ws');
-            /* 
-            const ws = new WebSocketServer('wss://websocket-echo.com/');
+    
+    
+    public marketPlace = async (props: any): Promise<AxiosResponse> => {
 
-            ws.onopen = function open() {
-              console.log('connected');
-              ws.send(Date.now());
-            };
+        try {
+            const baseUrl: string = "http://localhost:3000"
+            
+            const items: AxiosResponse = await axios.get(
+              baseUrl + "/inventory/marketplace"
+            )
 
-            ws.onclose = function close() {
-              console.log('disconnected');
-            };
+            let element = document.getElementById('overScreen');
+            //alert(props.id);
+            props.setContentOverScreen(<Marketplace items={items}/>);
+            element.classList.add("act");
 
-            ws.onmessage = function incoming(data) {
-              console.log(`Roundtrip time: ${Date.now() - data.data} ms`);
-
-              setTimeout(function timeout() {
-                ws.send(Date.now());
-              }, 500);
-            };
-            */
-
-        
-    //}
+            return baseUrl;
+             
+        } catch (error: any) {
+            throw new Error(error);
+        } 
+    }
   
 };
 

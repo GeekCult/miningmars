@@ -14,7 +14,8 @@ import {
 export interface ModalProps {
   isShown: boolean;
   hide: () => void;
-  modalContent: JSX.Element;
+  //modalContent: JSX.Element;
+  modalContent: any;
   headerText: string;
 }
 

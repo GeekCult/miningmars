@@ -28,19 +28,12 @@ const MineButton = ({
         try {
             
             if(userAddress === '' || wallet === null){
-                return (<Modal/>);
+                toggle();
                 
             }else{
                 
-                //let result = mineManager.saveMine();
-                
-                
                 let result = mineManager.mine();
-                var min = 4000;
-                result.forEach(function (value) {
-                    toast.show({ title: value.title,  content: value.content,  duration: min + 100  }); 
-                    //min = min + 100;
-                }); 
+                return result;
             }
             
         } catch (error) {

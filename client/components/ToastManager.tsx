@@ -5,6 +5,7 @@ import Toast, { ToastProps } from "./Toast";
 interface ToastOptions {
   id?: string;
   title: string;
+  mode: string;
   content: string;
   duration?: number;
 }

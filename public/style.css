@@ -21,6 +21,17 @@ p {font-size: 17px}
 .ctn_barra_guerrilha                                                            {font-size: 16px;}
 .modal-body p {font-size: 14px;}
 
+
+.overScreen {background: rgba(0,0,0,0.8); height: 100%; width:100%; position: fixed; z-index:50; top: -100%; transition: all 0.5s ease-in-out 0.2s; }
+.overScreen.act {top: 0%;}
+.overScreen .container {height: 100%;}
+.btn_close, .btn-close {position: absolute;right: 10px;top: 10px;background: #201f1f;height: 40px;width: 40px;z-index: 20;color: #fff;border-radius: 40px;text-align: center;padding: 10px;}
+.title {color: #ff9900}
+.centerView {transform: translateY(-50%); display:grid;position:absolute; top:50%; width:100%;padding: 33px 50px;background: rgba(0,0,0,0.6);border: 1px solid #333;border-radius: 20px;transform: translateX(-50%) translateY(-50%);left: 50%;}
+.paragraph {white-space: break-spaces;}
+.toast-success {background: #ff9900;}
+.titleUp {margin: -20px 0 30px 0;}
+
 /* PierImages */
 #molbars_1 {margin: auto; display: block}
 #molbars_1 div {position: relative; transition: width 2s, height 2s, transform 2s; opacity: 0; background-size: cover; background-repeat: no-repeat;}
@@ -144,7 +155,7 @@ img {max-width: 100%;vertical-align: middle;}
 .bold {font-weight: bold;}
 .shopping_cart a.top_cart {display: block;}
 .badge {background: #fff;box-shadow: none;padding: 10px 15px;border-radius: 20px;border: 1px solid #ccc; color: #333;}
-.badge3 {background: #f0f0f0;border-radius: 17px;padding: 8px 22px;margin-left: 3px;font-size: 11px;}
+.badge3 {background: #f0f0f0;border-radius: 5px;padding: 5px 22px;font-size: 17px; color:#000; }
 droppp {display: block; position: relative; width: 100%;}
 .ftItm {height: auto;width: 100%;border: 1px solid #ccc;background: #fff;border-radius: 12px;padding: 13px 15px;cursor: pointer;position: relative;font-size: 16px;}
 .ftItmHd {display: none;position: absolute;background: #fff;width: 100%;border: 1px solid #ccc;z-index: 100;border-radius: 0px;box-shadow: 0 5px 8px rgba(128,128,128,0.5);overflow: hidden auto;max-height: 200px; padding: 15px 5px; font-size: 15px;}
@@ -172,8 +183,8 @@ span.fa-stack .fa-star.fa-stack-2x::before {content: "\f005";color: #ebdb2c;}
 
 .txt_plus, .txt_plus_resp, .txt-plus, .txt-plus-resp {height: 50px !important;font-size: 1.1em !important;}
 .btn_plus0, .btn_plus0_resp                                                     {height: 40px!important; padding: 7px 0px!important;}
-.btn-plus, .btn_plus                                                            {padding: 14px 20px;}
-.btn-plus0, .btn_plus0                                                          {padding: 14px 20px;}
+.btn-plus, .btn_plus, .btn-plus0, .btn_plus0                                                            {padding: 14px 20px!important;}
+
 .btn-plus2, .btn_plus2{padding: 24px 20px!important;}
 .rounded                                                                        {border-radius: 13px!important;}
 .bt_style_share {padding: 10px 20px;border-radius: 30px;font-size: 16px!important;background: #394f79;color:#fff; border: none!important; text-align:center}
@@ -611,7 +622,8 @@ gray, .gray, .txt_gray                                                          
 .pp_awesome {background: #fff; border-radius: 20px; box-shadow: 0 4px 5px rgba(0,0,0,0.4);}
 .pp_square,.pp_square_bg, .pp_square_dark {display:block;padding:4px;line-height:20px;border:1px solid #ddd;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.055);-moz-box-shadow:0 1px 3px rgba(0,0,0,.055);box-shadow:0 1px 3px rgba(0,0,0,.055);-webkit-transition:.2s ease-in-out;-moz-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:.2s ease-in-out}
 .elipse_gray {background: #f9f9f9; border-radius: 100px; border: 1px solid #ccc;}
-
+.pp_square_black {padding: 10px; border: 1px solid #333; background: rgba(0,0,0,0.5); margin: 0 0 5px 0px;}
+.pp_square_black:hover {background: #2b2b2bde;}
 
 
 .container .container {width: auto !important;}
@@ -780,6 +792,9 @@ topics_colapse topic                                                            
 @keyframes slide-in { from { transform: translateX(30px); opacity: 0;}  to { transform: translateX(0px); opacity: 1; }}
 button {background: none;border: none;color: #ffffff;font-weight: 900;outline: none;cursor: pointer;border-radius: 8px; padding: 4px 8px;}
 button:hover { background-color: rgba(255, 255, 255, 0.1);}
+
+#toast-container-main > div.success {background-color: rgba(54, 249, 0, 0.37)!important;}
+#toast-container-main > div.error  {background-color: rgba(249, 0, 0, 0.37)!important;} 
 
 /*Flash Notice */
 .flash_notice                                                                   {position:fixed; bottom:0; left:0; width:100%; padding: 10px 0.8em 0.8em 0.8em; border-top: 2px solid #333; z-index: 1010; }
@@ -1190,6 +1205,7 @@ button:hover { background-color: rgba(255, 255, 255, 0.1);}
 .showMe {position: relative;-moz-animation: cssAnimation2 0s ease-in 7s forwards; -webkit-animation: cssAnimation2 0s ease-in 7s forwards; -o-animation: cssAnimation2 0s ease-in 7s forwards; animation: cssAnimation2 0s ease-in 7s forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;z-index: 10000; width: 0px; height: 0px; overflow:hidden;}
 
 .btn-main {padding: 10px 20px; background: #ff9900; color:#000; text-align:center}
+.btn-main:hover {background: #ff6000}
 
 html,
 body,
@@ -1214,6 +1230,9 @@ body,
 .btn-orange:hover {background:#c86405;}
 .hover:hover {background: #ff7b0769}
 .width450 {width: 450px;}
+.width350 {width: 350px;}
+.width300 {width: 300px;}
+.width250 {width: 250px;}
 
 .header {
   width: 100%;
@@ -1405,6 +1424,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+.no-number input[type="number"] {
   -moz-appearance: textfield;
 }

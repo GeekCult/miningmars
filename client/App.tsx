@@ -44,6 +44,8 @@ const App = () => {
     const [userBalance, setUserBalance] = useState<number>(0);
     const [storage, setStorage] = useState<number>(0);
     const [contentModal, setContentModal] = useState<any>(undefined);
+    const [contentOverScreen, setContentOverScreen] = useState<any>(undefined);
+    const [contentOverScreen2, setContentOverScreen2] = useState<any>(undefined);
     const [titleModal, setTitleModal] = useState<string>("Transfer");
     const [copiedPublicToken, setCopiedPublicToken] = useState<boolean>(false);
     const [beaconConnection, setBeaconConnection] = useState<boolean>(false);
@@ -73,15 +75,23 @@ const App = () => {
     }
     
     const purchaseIt = function() {
-        let result = tezosManager.connect({ Tezos: Tezos,  wallet: wallet });
+        const result = tezosManager.connect({ Tezos: Tezos,  wallet: wallet });
+    }
+    
+    const saveIt = function() {
+        const result = mineManager.saveMine();
     }
     
     const inspectIt = function() {
-        let result = tezosManager.inspectContract({ Tezos: Tezos,  wallet: wallet });
+        const result = tezosManager.inspectContract({ Tezos: Tezos,  wallet: wallet });
     }
     
     const inventoryIt = function() {
-        let result = mineManager.inventory({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal });    
+        const result = mineManager.inventory({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2 });    
+    }
+    
+    const marketPlaceIt = function() {
+        const result = mineManager.marketPlace({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen }); 
     }
     
     const transferIt = function() {
@@ -96,7 +106,8 @@ const App = () => {
             id: 'my-id',  
             title: "You received a chicken",  
             content: "Yellow magnetic chicken",  
-            duration: 4000
+            duration: 4000,
+            mode: 'common'
           });
           //toast.destroy('my-id');
     }
@@ -119,6 +130,8 @@ const App = () => {
                     <button className="btn btn-main mgR" onClick={purchaseIt}><i className="fas fa-dollar-sign"></i> Purchase</button>
                     <button className="btn btn-main mgR" onClick={inspectIt}><i className="fas fa-receipt"></i> Inspect</button>
                     <button className="btn btn-main mgR" onClick={inventoryIt}><i className="fas fa-receipt"></i> Inventory</button>
+                    <button className="btn btn-main mgR" onClick={saveIt}><i className="fas fa-save"></i> Save</button>
+                    <button className="btn btn-main mgR" onClick={marketPlaceIt}><i className="fas fa-store"></i> MarketPlace</button>
                 </div>
             </div>
             <div className="Footer">
@@ -127,6 +140,12 @@ const App = () => {
            
             <div className="Mine">
                 <Modal isShown={isShown} hide={toggle} modalContent={contentModal} headerText={titleModal}/>
+            </div>
+            <div className="overScreen" id="overScreen">
+                <div className="container r">{contentOverScreen}</div>                
+            </div>
+            <div className="overScreen" id="overScreen2">
+                <div className="container r">{contentOverScreen2}</div>                
             </div>
         </div>
     );
