@@ -178,14 +178,40 @@ export const PurchaseModal: FunctionComponent<PurchaseModalProps> = (props) => {
     return (
       <React.Fragment>
           <StyledModal>
-              <div className="center">
-                  <img src={props.imageSrc} alt="Item"/>
-                  <h4>{props.titleItem}</h4>
-              </div>
-              <Message>{props.message}</Message>
-              <ConfirmationButtons>
-                  <button onClick={createContract} className="btn btn-success btn-lg btn-block"><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
-              </ConfirmationButtons>
+                <div className="cflx center-flex gap-40 p-20">
+                    <div className="fr2">
+                        <img src={props.imageSrc} alt="Item"/>
+                    </div>
+                    <div className="fr3">
+                        <div className="cflx center-flex">
+                            <div className="fr1">
+                                <h4>{props.titleItem}</h4>
+                            </div>
+                            <div className="cflx justify-right">
+                                <p className="mg0">3 ꜩ</p>
+                            </div>
+                        </div>
+                        
+                        <p className="paragraph">A tool created from the metals of Uranium, ready for you to mine in different types of terrain.</p>
+                        <div className="cflx gap-10 mgB2">
+                            <div className="cflx gap-10 center-flex ctnIcItem2">
+                                <img src="../imagens/ic_power_pp.png" alt="power" height="15"/>
+                                <div>Power 3</div>
+                            </div>
+                            <div className="cflx gap-10 center-flex ctnIcItem2">
+                                <img src="../imagens/ic_heart_pp.png" alt="stamina" height="15"/>
+                                <div>Stamina 2</div>
+                            </div>
+                            <div className="cflx gap-10 center-flex ctnIcItem2">
+                                <img src="../imagens/ic_luck_pp.png" alt="luck" height="15"/>
+                                <div>Luck 1</div>
+                            </div>
+                        </div>
+                        <ConfirmationButtons>
+                            <button onClick={createContract} className="btn btn-success"><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
+                        </ConfirmationButtons>
+                    </div>
+                </div>
           </StyledModal>
       </React.Fragment>
     );

@@ -6,6 +6,7 @@ interface ToastOptions {
   id?: string;
   title: string;
   mode: string;
+  image: string;
   content: string;
   duration?: number;
 }

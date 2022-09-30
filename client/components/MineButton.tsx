@@ -45,8 +45,7 @@ const MineButton = ({
         <div className="MineButton bg-black2">
             <div className="container">
                 <div className='center p-20'>
-                    <button className="btn btn-orange btn-lg btn-mine" onClick={runMine}>
-                    <i className="fas fa-dice mgR0"></i> Mine</button>
+                    <button className="btn btn-orange-modern btn-mine" onClick={runMine}>Mine</button>
                 <Modal isShown={isShown} hide={toggle} modalContent={
                 <ConfirmationModal
                 onConfirm={onConfirm}

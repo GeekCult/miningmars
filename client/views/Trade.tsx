@@ -33,11 +33,11 @@ const Trade = ({
             // Send data to the backend via POST
             const sell = await axios.post(baseUrl + "/inventory/sell", {'id_item': props.id, 'id_user': 0, 'amount': props.amount, 'coins': props.coins, 'title': props.title, 'image': props.image} )
             .then(response => { 
-                toast.show({ title: response.data['message'], content: "", duration: 4000, mode: "success"});
+                toast.show({ title: response.data['message'], content: "", duration: 4000, mode: "success", image: ""});
                 return response.data; 
             })
             .catch(error => {  
-                toast.show({ title: error, content: "", duration: 4000, mode: "error"});
+                toast.show({ title: error, content: "", duration: 4000, mode: "error", image: ""});
                 console.error('There was an error!', error); 
             }); 
         
@@ -60,7 +60,7 @@ const Trade = ({
                 </div>
                 <div className="fr3">
                     <h3 className="title">{item.title}</h3>
-                    <p className="title paragraph">{item.description}</p>
+                    <p className="txt-white paragraph">{item.description}</p>
                     <div className="cflx">
                         <div>
                             <label className="txt-white">Quantity</label>

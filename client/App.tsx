@@ -87,11 +87,11 @@ const App = () => {
     }
     
     const inventoryIt = function() {
-        const result = mineManager.inventory({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2 });    
+        const result = mineManager.inventory({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2, toast: toast });    
     }
     
     const marketPlaceIt = function() {
-        const result = mineManager.marketPlace({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen }); 
+        const result = mineManager.marketPlace({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, toast: toast }); 
     }
     
     const transferIt = function() {
@@ -107,7 +107,8 @@ const App = () => {
             title: "You received a chicken",  
             content: "Yellow magnetic chicken",  
             duration: 4000,
-            mode: 'common'
+            mode: 'common', 
+            image: "../imagens/yellow-chicken.png"
           });
           //toast.destroy('my-id');
     }

@@ -15,25 +15,42 @@ export class MineManager {
         const baseUrl: string = "http://localhost:3000"
         
         try {   
-            let nrItems = mineUtils.randomNumber(1, 5);
+            let nrItems = mineUtils.randomNumber(1, 1);
+            let userMine = {}
             //alert(nrItems);
 
             const recordSet: AxiosResponse = await axios.get(
                 baseUrl + "/inventory/mine", {params: {nr: nrItems}}
             )
             
+            userMine.xp = 1; userMine.coin = 0; userMine.stamina = 1;
+            recordSet.data.data.push({id: 0, title: 'Xp', image: "xp.png"})
             //let mineResult = [{title: '+1 Yellow Chicken', content: ''}, {title: '+2 Silver Spoons', content: ''}, {title: '+1 Gold', content: ''}];
             
             Object.keys(recordSet.data.data).map((d: any)=>{
                 
                 var nrQtd = mineUtils.randomNumber(1, 3);
                 
-                // Send data to the backend via POST
-                const mineResult = axios.post(baseUrl + "/resources", {'id_item': recordSet.data.data[d].id, 'id_user': 0, 'amount': nrQtd} )
-                    .then(response => { toast.show({ title: "+" + nrQtd + " " + recordSet.data.data[d].title,  content: "",  duration: 4000, mode: 'common' }); return response.data; })
-                    .catch(error => {  console.error('There was an error!', error); }); 
+                if(recordSet.data.data[d].title != 'Coin' && recordSet.data.data[d].title != 'Xp'){
+                    // Send data to the backend via POST
+                    const mineResult = axios.post(baseUrl + "/resources", {'id_item': recordSet.data.data[d].id, 'id_user': 0, 'amount': nrQtd} )
+                        .then(response => { 
+                            toast.show({ title: "+" + nrQtd + " " + recordSet.data.data[d].title,  content: "",  duration: 10000, mode: 'common', image: '../imagens/' + recordSet.data.data[d].image }); return response.data; 
+
+                        })
+                        .catch(error => {  console.error('There was an error!', error); }); 
+                }
+                
+                if(recordSet.data.data[d].title == 'Coin' || recordSet.data.data[d].title == 'Xp'){
+                    if(recordSet.data.data[d].title == 'Xp') nrQtd = userMine.xp;
+                    if(recordSet.data.data[d].title == 'coin') userMine.coin = nrQtd;
+                    toast.show({ title: "+" + nrQtd + " " + recordSet.data.data[d].title,  content: "",  duration: 10000, mode: 'common', image: '../imagens/' + recordSet.data.data[d].image });
+                }
                  
             });
+            
+             
+            let update = this.updateUser(userMine);
             
             //recordSet.forEach(function (value) {
                 //toast.show({ title: value.title,  content: value.value,  duration: 4000  }); 
@@ -47,6 +64,18 @@ export class MineManager {
         }
     };
        
+    public updateUser = async (props): Promise<AxiosResponse> => {
+        
+        const baseUrl: string = "http://localhost:3000"
+        
+        // Send data to the backend via POST
+        const user = await axios.post(baseUrl + "/user/xp", {'xp': props.xp, 'coin': props.coin, 'stamina': props.stamina, 'id_user': 0} )
+            .then(response => { return response.data; })
+            .catch(error => {  toast.show({ title: 'There was an error!' + error,  content: "",  duration: 4000, mode: 'error', image: "" }); console.error('There was an error!', error); }); 
+
+        return user;
+    };
+    
     public saveMine = async (): Promise<AxiosResponse> => {
         
         const baseUrl: string = "http://localhost:3000"
@@ -54,8 +83,8 @@ export class MineManager {
 
         // Send data to the backend via POST
         const mineResult = await axios.post(baseUrl + "/resources", {'id_item': 5, 'id_user': 0, 'amount': nrItems} )
-            .then(response => { toast.show({ title: "Saved test",  content: "",  duration: 4000, mode: 'success' }); return response.data; })
-            .catch(error => {  toast.show({ title: 'There was an error!' + error,  content: "",  duration: 4000, mode: 'error' }); console.error('There was an error!', error); }); 
+            .then(response => { toast.show({ title: "Saved test",  content: "",  duration: 4000, mode: 'success', image: "" }); return response.data; })
+            .catch(error => {  toast.show({ title: 'There was an error!' + error,  content: "",  duration: 4000, mode: 'error', image: "" }); console.error('There was an error!', error); }); 
 
         return mineResult;
     };

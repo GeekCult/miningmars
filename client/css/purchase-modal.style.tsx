@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ConfirmationButtons = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
 `;
 
 export const Message = styled.div`
@@ -14,5 +14,5 @@ export const Message = styled.div`
 
 
 export const StyledModal = styled.div`
-  width: 310px;
+  width: 650px;
 `;

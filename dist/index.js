@@ -8,6 +8,7 @@ var path_1 = __importDefault(require("path"));
 //import cors from "cors";
 var resourcesRouter = require("../routes/resources");
 var inventoryRouter = require("../routes/inventory");
+var userRouter = require("../routes/user");
 var app = (0, express_1.default)();
 //app.use(cors);
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -26,6 +27,7 @@ app.get("/", function (req, res, next) {
 });
 app.use("/inventory", inventoryRouter);
 app.use("/resources", resourcesRouter);
+app.use("/user", userRouter);
 /* Error handler middleware */
 app.use(function (err, req, res, next) {
     var statusCode = err.statusCode || 500;

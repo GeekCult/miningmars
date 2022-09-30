@@ -42,9 +42,14 @@ const Header_1 = ({
                     </div>
                 </div>
             </div>
-            <div className="banner">
+            <div className="banner r">
                 <img src="./imagens/banner.jpg" alt="banner"/>
+                <div className="cntContentBanner">
+                    <h2>30th Setember, 2087</h2>
+                    <p>Planet Mars</p>
+                </div>
             </div>
+            
         </div>
     );
 };

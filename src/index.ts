@@ -3,6 +3,7 @@ import path from "path";
 //import cors from "cors";
 const resourcesRouter = require("../routes/resources");
 const inventoryRouter = require("../routes/inventory");
+const userRouter = require("../routes/user");
 const app = express();
 
 //app.use(cors);
@@ -28,7 +29,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction): void => {
 
 app.use("/inventory", inventoryRouter);
 app.use("/resources", resourcesRouter);
-
+app.use("/user", userRouter);
 
 /* Error handler middleware */
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

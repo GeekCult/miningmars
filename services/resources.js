@@ -8,7 +8,7 @@ async function getMultiple(page = 1){
     
     const rows = await db.query(
         `SELECT * 
-        FROM resources LIMIT ${offset},${config.listPerPage}`
+        FROM resources LIMIT ${offset}, 100`
     );
     
     const data = helper.emptyOrRows(rows);

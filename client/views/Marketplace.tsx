@@ -27,11 +27,11 @@ const Marketplace = ({
             // Send data to the backend via POST
             const sell = await axios.post(baseUrl + "/inventory/sell", {'id_item': props.id, 'id_user': 0, 'amount': props.amount, 'coins': props.coins, 'title': props.title, 'image': props.image} )
             .then(response => { 
-                toast.show({ title: response.data['message'], content: "", duration: 4000, mode: "success"});
+                toast.show({ title: response.data['message'], content: "", duration: 4000, mode: "success", image: ""});
                 return response.data; 
             })
             .catch(error => {  
-                toast.show({ title: error, content: "", duration: 4000, mode: "error"});
+                toast.show({ title: error, content: "", duration: 4000, mode: "error", image: ""});
                 console.error('There was an error!', error); 
             }); 
         
@@ -50,9 +50,9 @@ const Marketplace = ({
             <h2 className="mgB title titleUp">MarketPlace</h2>
             <div className="cflx gap-10 mgB">
                 <div className="fr4">
-                    <input type="text" placeholder="Search an special item" className="form-control txt-plus mgR0" value="" onChange={e => alert('hehe')} />
+                    <input type="text" placeholder="Search for a special item" className="form-control txt-plus mgR0" value="" onChange={e => alert('search')} />
                 </div>
-                <div className="fr1">
+                <div className="fr4">
                     <button className="btn btn-main btn-plus" onClick={ () => { alert('Search');} } >
                         <i className="fa fa-search"></i> Search
                     </button>
@@ -69,8 +69,9 @@ const Marketplace = ({
                     </div>
                     
                 </div>
-                <div className="fr2">
-                    <div className="mgR txt-white">{items.data.data[d].coins} <i className="fab fa-bitcoin txt-yellow"></i></div>
+                <div className="fr2 cflx center-flex">
+                    <img src="../imagens/ic_coin.png" alt="" height="20"/>
+                    <div className="mgL txt-white">{items.data.data[d].coins}</div>                    
                 </div>
                 <div className="fr1 cflx justify-right">
                     <button className="btn btn-success" onClick={toggle}><i className="fa fa-shopping-cart"></i> Buy</button>

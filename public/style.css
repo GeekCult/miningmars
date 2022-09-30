@@ -87,6 +87,9 @@ nav#primary li {position: relative;height: 20px;margin: 7px 0px;width: 15px;}
 nav#primary a.active {background: #FFD51F;}
 nav#primary a {display: block;width: 20px;height: 20px;text-indent: -9999px;background: #fff;border-radius: 50%;height: 15px;width: 15px;box-shadow: 0 2px 3px rgba(0,0,0,0.2)inset;outline:none;}
 nav#primary div {position: absolute;right: 22px;top: -7px;display: none;padding: 4px 20px 4px 7px;color: #fff;white-space: nowrap;background: #ff9900;}
+.slotItems {height: 300px; width: 300px; border:1px solid #333; border-radius: 30px; cursor: pointer}
+.slotItems i {text-align: center; top: 50%; position: relative;left: 50%;font-size: 90px;transform: translateY(-50%) translateX(-50%);}
+.slotItems:hover {background: #222;}
 
 .headertop {position: relative;}
 .needhead {margin-bottom: 0;overflow: hidden;padding: 0px 0 0px;text-align: left;}
@@ -102,6 +105,12 @@ nav#primary div {position: absolute;right: 22px;top: -7px;display: none;padding:
 
 .shine{display: block;height: 100%;width: 100%;}
 .bCItem                                                                         {float: left; margin: 2px 5px 0 0;}
+.ctnIcItem {background: #6d6254;padding: 5px 10px;border-radius: 5px;font-size: 13px;}
+.ctnIcItem2 {background: #f1f1f1; padding: 5px 10px; border-radius: 5px;font-size: 13px; text-align:center; width: 100%; justify-content:center}
+.cntContentBanner {position:absolute; top:50px; right: 40px; z-index: 10; text-align: right; }
+.cntContentBanner h3 {color: #ff9900;}
+.cntContentBanner p {color: #ccc;}
+.btn-mine {font-size: 20px;}
 
 .brand img {position: absolute}
 
@@ -252,7 +261,7 @@ iframe {border: none}
 .pricingTable:hover .price-value:after{border-color: transparent transparent #4e9310 #4e9310;}
 .btn-yellow, .btn-mercado_livre  {background: #ffea00!important; background-image: none!important;background-image: -webkit-linear-gradient(top, #ffea00, #ffcc00)!important;background-image: -moz-linear-gradient(top, #ffea00, #ffcc00)!important;background-image: -ms-linear-gradient(top, #ffea00, #ffcc00)!important;background-image: -o-linear-gradient(top, #ffea00, #ffcc00)!important;background-image: linear-gradient(to bottom, #ffea00, #ffcc00)!important;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-shadow: 1px 1px 1px #666666;color: #ffffff!important;border: solid #edcd00 1px!important;text-decoration: none;}
 .btn-yellow:hover, .btn-mercado_livre:hover{color: #f1f1f1; box-shadow: 0px 5px 10px rgba(0,0,0,0.4); }
-.btn-orange-modern  {background: #ff9900; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-shadow: 1px 1px 1px #666666;color: #ffffff;text-decoration: none; padding: 12px 40px; border: none;}
+.btn-orange-modern  {background: #ff9900; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 35px;text-shadow: 1px 1px 1px #666666;color: #ffffff;text-decoration: none; padding: 12px 80px!important; border: none;}
 .btn-orange-modern:hover{color: #fff; box-shadow: 0px 5px 10px rgba(0,0,0,0.4); background: #da7200}
 .btn-yellow-modern  {background: #FFD51F; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-shadow: 1px 1px 1px #666666;color: #000;text-decoration: none; padding: 12px 40px;}
 .btn-yellow-modern:hover{color: #000; box-shadow: 0px 5px 10px rgba(0,0,0,0.4); background: #FFD510}
@@ -500,6 +509,8 @@ a.capitalize-first                                                              
 .gap_15, .gap15, .gap-15                                                        {gap: 15px;}
 .gap_10, .gap10, .gap-10                                                        {gap: 10px;}
 .gap_20, .gap20, .gap-20                                                        {gap: 20px;}
+.gap_40, .gap40, .gap-40                                                        {gap: 40px;}
+
 .width_auto, .width-auto {width: auto!important;}
 .width_100, .width-100 {width: 100px;} .width_115, .width-115 {width: 115px;}
 #menu_ecommerce_support .list-group a {border: none; padding: 0px; color: initial}
@@ -613,6 +624,7 @@ gray, .gray, .txt_gray                                                          
 .clear {clear: both;}
 
 .hrSpecial {border-top: 1px solid #000}
+.hrSpecial2 {border-top: 1px solid #333}
 .video-container, .video-container2                                             {position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;}
 .video-container iframe, .video-container2 iframe,
 .video-container object, .video-container2 object,
@@ -801,6 +813,13 @@ button:hover { background-color: rgba(255, 255, 255, 0.1);}
 .flash_notice_bg                                                                {width: 100%; height: 100%; position: absolute; z-index: 0; background: #333; opacity: 0.8; top:0; left: 0}
 .flash_notice_button_close                                                      {width: 35px; height: 35px; cursor: pointer; color: #fff; position: absolute; right: 10px; top: 10px; opacity: 0.7; background: #000; padding: 5px; text-align: center}
 #flash_notice_text                                                              {padding: 5px 0px 10px 0; color: #fff; font-size: 14px; position: relative}
+
+
+#ctnItems, #ctnProfile {display:none; padding: 25px; border: 1px solid #333;}
+#ctnItems.active, #ctnProfile.active {display:block}
+.nav-horizontal {display:flex; }
+.nav-horizontal button {padding: 10px 20px; font-size: 20px; background: #1c1c1c!important; color: #fff; text-align:center; cursor: pointer; border-radius: unset;}
+.nav-horizontal button:hover, .nav-horizontal button.active {background: #333!important;} 
 
 /* Responsive
 ------------------*/
@@ -1253,13 +1272,6 @@ body,
   margin: auto;
   width: 400px;
   display: block;
-}
-
-.title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 h1 {
