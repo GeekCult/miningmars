@@ -94,7 +94,7 @@ export class MineManager {
 
     public connect = async (props: any): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "http://localhost:3000"
+        const baseUrl: string = ""
         
         try {
             //alert(props.Title);
