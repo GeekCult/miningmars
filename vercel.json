@@ -1,4 +1,4 @@
 {
     "version": 2,
-    "rewrites": [{ "source": "/resources", "destination": "/routes/resources" }]
+    "rewrites": [{ "source": "/resources", "destination": "/routes/resources.js" }]
 }
