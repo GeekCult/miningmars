@@ -94,7 +94,7 @@ export class MineManager {
 
     public connect = async (props: any): Promise<AxiosResponse> => {
         
-        const baseUrl: string = ""
+        const baseUrl: string = "https://miningmars.vercel.app"
         
         try {
             //alert(props.Title);
