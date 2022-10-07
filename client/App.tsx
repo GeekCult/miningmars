@@ -90,6 +90,10 @@ const App = () => {
         const result = mineManager.inventory({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2, toast: toast });    
     }
     
+    const fightIt = function() {
+        const result = mineManager.fight({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2, toast: toast });    
+    }
+    
     const marketPlaceIt = function() {
         const result = mineManager.marketPlace({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, toast: toast }); 
     }
@@ -129,10 +133,11 @@ const App = () => {
                     <button className="btn btn-main mgR" onClick={transferIt}><i className="fa fa-wallet"></i> Transfer</button>
                     <button className="btn btn-main mgR" onClick={connectIt}><i className="fa fa-star"></i> Resources</button>
                     <button className="btn btn-main mgR" onClick={purchaseIt}><i className="fas fa-dollar-sign"></i> Purchase</button>
-                    <button className="btn btn-main mgR" onClick={inspectIt}><i className="fas fa-receipt"></i> Inspect</button>
+                    <button className="btn btn-main mgR hide" onClick={inspectIt}><i className="fas fa-receipt"></i> Inspect</button>
                     <button className="btn btn-main mgR" onClick={inventoryIt}><i className="fas fa-receipt"></i> Inventory</button>
-                    <button className="btn btn-main mgR" onClick={saveIt}><i className="fas fa-save"></i> Save</button>
+                    <button className="btn btn-main mgR hide" onClick={saveIt}><i className="fas fa-save"></i> Save</button>
                     <button className="btn btn-main mgR" onClick={marketPlaceIt}><i className="fas fa-store"></i> MarketPlace</button>
+                    <button className="btn btn-main mgR" onClick={fightIt}><img src="./imagens/icon_swords.png" height="15"/> Fight</button>
                 </div>
             </div>
             <div className="Footer">

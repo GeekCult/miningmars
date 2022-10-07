@@ -28,9 +28,20 @@ p {font-size: 17px}
 .btn_close, .btn-close {position: absolute;right: 10px;top: 10px;background: #201f1f;height: 40px;width: 40px;z-index: 20;color: #fff;border-radius: 40px;text-align: center;padding: 10px;}
 .title {color: #ff9900}
 .centerView {transform: translateY(-50%); display:grid;position:absolute; top:50%; width:100%;padding: 33px 50px;background: rgba(0,0,0,0.6);border: 1px solid #333;border-radius: 20px;transform: translateX(-50%) translateY(-50%);left: 50%;}
+.ctnFight {border: none; border-radius: unset; padding:0px}
 .paragraph {white-space: break-spaces;}
 .toast-success {background: #ff9900;}
 .titleUp {margin: -20px 0 30px 0;}
+
+.bar-ind {padding: 10px; border:1px solid #333;}
+.ctnIn {position: absolute; top: 20%; color: #fff; background: #000;padding: 10px; border: 1px solid #333}
+.ctnInRight {position: absolute; top: 20%; color: #fff; background: #000; right: 0px; text-align: right; padding: 10px; border: 1px solid #333}
+
+.ctnBtFight {position: absolute; top: -34px; width: 100%;}
+.btnFight {background: #ff9900; color: #fff; border-radius:0px; padding: 5px 20px;}
+.btnFightL {border-top-left-radius:30px;}
+.btnFightR {border-top-right-radius:30px;}
+.btnFight:hover {background: #ff7800}
 
 /* PierImages */
 #molbars_1 {margin: auto; display: block}
@@ -41,8 +52,8 @@ p {font-size: 17px}
 .bxSh {border-radius: 15px; box-shadow: 0px 4px 3px rgba(0,0,0,0);overflow: hidden; border: 1px solid #f1f1f1; position: relative; margin-bottom: 20px}
 .bgBl {position: absolute; height: 100%; width: 100%; background: rgba(0,0,0,0.5); top: 0px; left: 0px}
 .bxCtn {position: absolute; top: 10px; left: 35px; height: 100%; width: 60%;}
-.bxCtn h3 {font-size: 33px;max-height: 75px; min-height: 50px; overflow: hidden; margin-top: 0px;}
-.bxCtn p {font-size: 20px; line-height: 30px; margin-bottom: 30px}
+.bxCtn h3 {font-size: 33px;max-height: 75px; min-height: 50px; overflow: hidden; margin-top: 0px; padding: 20px}
+.bxCtn p {font-size: 20px; line-height: 30px; margin-bottom: 30px;}
 
 .open {display: block}
 .bxSh .ppImgPict{height: 370px;}

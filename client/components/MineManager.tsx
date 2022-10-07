@@ -3,6 +3,7 @@ import React, { Component, useState } from "react";
 import Trade from "../views/Trade";
 import Marketplace from "../views/Marketplace";
 import Inventory from "../views/Inventory";
+import Fight from "../views/Fight";
 import { toast } from "../components/ToastManager";
 
 import { mineUtils } from "../components/MineUtils";
@@ -25,6 +26,7 @@ export class MineManager {
             
             userMine.xp = 1; userMine.coin = 0; userMine.stamina = 1;
             recordSet.data.data.push({id: 0, title: 'Xp', image: "xp.png"})
+            recordSet.data.data.push({id: 8, title: 'Coin', image: "coin.png"})
             //let mineResult = [{title: '+1 Yellow Chicken', content: ''}, {title: '+2 Silver Spoons', content: ''}, {title: '+1 Gold', content: ''}];
             
             Object.keys(recordSet.data.data).map((d: any)=>{
@@ -43,7 +45,7 @@ export class MineManager {
                 
                 if(recordSet.data.data[d].title == 'Coin' || recordSet.data.data[d].title == 'Xp'){
                     if(recordSet.data.data[d].title == 'Xp') nrQtd = userMine.xp;
-                    if(recordSet.data.data[d].title == 'coin') userMine.coin = nrQtd;
+                    if(recordSet.data.data[d].title == 'Coin') userMine.coin = nrQtd;
                     toast.show({ title: "+" + nrQtd + " " + recordSet.data.data[d].title,  content: "",  duration: 10000, mode: 'common', image: '../imagens/' + recordSet.data.data[d].image });
                 }
                  
@@ -139,12 +141,40 @@ export class MineManager {
         try {
             
             const items: AxiosResponse = await axios.get(
-              baseUrl + "/inventory"
+              baseUrl + "/inventory", {params: {id: 0}}
+            )
+            
+            const user: AxiosResponse = await axios.get(
+              baseUrl + "/user/me", {params: {id: 0}}
             )
             
             let element = document.getElementById('overScreen');
             //alert(props.id);
-            props.setContentOverScreen(<Inventory items={items} props={props}/>);
+            props.setContentOverScreen(<Inventory items={items} user={user.data.data} props={props}/>);
+            element.classList.add("act");
+             
+        } catch (error: any) {
+            throw new Error(error);
+        } 
+    }
+    
+    public fight = async (props: any): Promise<AxiosResponse> => {
+        
+        const baseUrl: string = "http://localhost:3000"
+        
+        try {
+            
+            const items: AxiosResponse = await axios.get(
+              baseUrl + "/inventory", {params: {id: 0}}
+            )
+            
+            const user: AxiosResponse = await axios.get(
+              baseUrl + "/user/me", {params: {id: 0}}
+            )
+            
+            let element = document.getElementById('overScreen');
+            //alert(props.id);
+            props.setContentOverScreen(<Fight items={items} user={user.data.data} props={props}/>);
             element.classList.add("act");
              
         } catch (error: any) {
@@ -217,10 +247,14 @@ export class MineManager {
             const items: AxiosResponse = await axios.get(
               baseUrl + "/inventory/marketplace"
             )
+            
+            const store: AxiosResponse = await axios.get(
+              baseUrl + "/inventory/store"
+            )
 
             let element = document.getElementById('overScreen');
             //alert(props.id);
-            props.setContentOverScreen(<Marketplace items={items}/>);
+            props.setContentOverScreen(<Marketplace items={items}, store={store} props={props}/>);
             element.classList.add("act");
 
             return baseUrl;

@@ -1,14 +1,15 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
 import { toast } from "../components/ToastManager";
+import { consumeManager } from "../components/ConsumeManager";
 import axios, { AxiosResponse } from "axios";
 import Trade from "../views/Trade";
 
 const Inventory = ({
-  items, props
+  items, user, props
   
 }: {
   
-  items: any; props: any;
+  items: any; user: any; props: any;
   
 }): JSX.Element => {
     
@@ -17,6 +18,7 @@ const Inventory = ({
     const [coins, setCoins] = useState<string>("1");
     const [amount, setAmount] = useState<string>("1");
     
+    //console.log(user);
     const closeOverScreen = function() {
         const element = document.getElementById('overScreen');
         element.classList.remove("act");
@@ -86,23 +88,27 @@ const Inventory = ({
     }
     
     const runIt = async (props: any): Promise<AxiosResponse> => {
-        
+         
         if(props.action == 'Delete'){
             props.props.setTitleModal("Delete");
             let image = "../imagens/" + props.item.image;
-            props.props.setContentModal( <div className="width350 center"><img src={image} alt="item" /><div className="bold center"> Delete this item from your Inventory? </div> <hr/><div className="center"><button className="btn btn-plus btn-success" onClick={ props.props.toggle() }>No</button> <button className="btn btn-plus btn-red" onClick={ () => runIt({action: 'Consume', props: props}) }>Yes</button></div> </div> );
+            props.props.setContentModal( <div className="width350 center"><img src={image} alt="item" /><div className="bold center"> Delete this item from your Inventory? </div> <hr/><div className="center"><button className="btn btn-plus btn-success" onClick={ props.props.toggle() }>No</button> <button className="btn btn-plus btn-red" onClick={ () => runIt({action: 'Consume', item:props.item, props: props}) }>Yes</button></div> </div> );
             props.props.toggle();
         }
         
         if(props.action == 'Use'){
             props.props.setTitleModal("Use");
             let image = "../imagens/" + props.item.image;
-            props.props.setContentModal( <div className="width350 center"><img src={image} alt="item" /><div className="bold center"> Do you want to use this item? </div> <hr/><div className="center"><button className="btn btn-plus btn-red" onClick={ props.props.toggle() }>No</button> <button className="btn btn-plus btn-success" onClick={ () => runIt({action: 'Consume', props: props}) }>Yes</button></div> </div> );
+            props.props.setContentModal( <div className="width350 center"><img src={image} alt="item" /><h3 className="title">{props.item.title}</h3><div className="bold center"> Do you want to use this item? </div> <hr/><div className="center"><button className="btn btn-plus btn-red" onClick={ props.props.toggle() }>No</button> <button className="btn btn-plus btn-success" onClick={ () => runIt({action: 'Consume', item:props.item, props: props}) }>Yes</button></div> </div> );
             props.props.toggle();
         }
         
         if(props.action == 'Consume'){
-            toast.show({ title: 'Your it was consumed', content: "", duration: 4000, mode: "success", image: "../imagens/ic_success.png"});
+            let consumeIt = await consumeManager.consumeItem(props.item)
+                .then(response => {  return response; } )
+                .catch(error => { console.error('There was an error!', error); }); 
+                
+                console.log(consumeIt);            
         }
         
     }
@@ -130,19 +136,19 @@ const Inventory = ({
                         <div className="cflx">
                             <div className="mgR2 cflx center-flex">
                                 <h4 className="title center mgR">XP</h4>
-                                <p className="txt-white mg0">123</p>
+                                <p className="txt-white mg0">{user.xp}</p>
                             </div>
                             <div className="mgR2 cflx center-flex">
                                 <h4 className="title center mgR">Stamina</h4>
-                                <p className="txt-white mg0">10</p>
+                                <p className="txt-white mg0">{user.stamina}</p>
                             </div>
                             <div className="mgR2 cflx center-flex">
                                 <h4 className="title center mgR">Luck</h4>
-                                <p className="txt-white mg0">2</p>
+                                <p className="txt-white mg0">{user.luck}</p>
                             </div>
                             <div className="cflx center-flex">
                                 <h4 className="title center mgR">Coins</h4>
-                                <p className="txt-white mg0">92</p>
+                                <p className="txt-white mg0">{user.coin}</p>
                                 <img src="../imagens/ic_coin.png" alt="Coin" className="mgL" height="20"/>
                             </div>
                         </div>
@@ -165,7 +171,7 @@ const Inventory = ({
             </div>
             
             
-            <div id="ctnItems" className={ctnItems}>
+            <div id="ctnItems" className={ctnItems} style={{maxHeight: '400px', overflow: 'auto'}}>
                 { Object.keys(items.data.data).map((d)=>{ return(
                 <div className="pp_square_black cflx gap-10 center-flex" key={items.data.data[d].id}>
                     <div className="fr1 mgR2">

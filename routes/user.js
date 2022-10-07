@@ -3,11 +3,11 @@ const router = express.Router();
 const user = require('../services/user');
 
 /* GET resources */
-router.get('/', async function(req, res, next) {
+router.get('/me', async function(req, res, next) {
     try {
-        res.json(await user.getMultiple(req.query.page));
+        res.json(await user.getMe(req.query.id));
     } catch (err) {
-        console.error(`Error while getting resources `, err.message);
+        console.error(`Error while getting user info `, err.message);
         next(err);
     }
 });
@@ -18,7 +18,18 @@ router.post('/xp', async function(req, res, next) {
 
         res.json(await user.updateXp(req.body));
     } catch (err) {
-        console.error(`Error while creating resources`, err.message);
+        console.error(`Error while update xp`, err.message);
+        next(err);
+    }
+});
+
+/* POST consume */
+router.post('/consume', async function(req, res, next) {
+    try {
+
+        res.json(await user.updateConsume(req.body));
+    } catch (err) {
+        console.error(`Error while update consume`, err.message);
         next(err);
     }
 });

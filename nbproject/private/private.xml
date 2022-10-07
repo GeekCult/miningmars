@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Applications/MAMP/htdocs/mars4/src/index.ts</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/config.js</file>
             <file>file:/Applications/MAMP/htdocs/mars4/client/App.tsx</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/client/components/MineManager.tsx</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/public/style.css</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/client/components/MineButton.tsx</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/client/views/Inventory.tsx</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/client/views/Marketplace.tsx</file>
-            <file>file:/Applications/MAMP/htdocs/mars4/client/views/Trade.tsx</file>
         </group>
     </open-files>
 </project-private>

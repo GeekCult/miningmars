@@ -6,7 +6,7 @@ async function getMultiple(page = 1){
     
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
-        `SELECT A.id, A.id_item, A.amount, B.title, B.image  FROM inventory AS A INNER JOIN resources AS B ON B.id = A.id_item ORDER BY B.id DESC LIMIT ${offset},${config.listPerPage}`
+        `SELECT A.id, A.id_item, A.amount, B.title, B.image  FROM inventory AS A INNER JOIN resources AS B ON B.id = A.id_item ORDER BY B.title ASC LIMIT ${offset},100`
     );
     const data = helper.emptyOrRows(rows);
     const meta = {page};
@@ -46,6 +46,37 @@ async function getMine(nr = 1){
     }
 }
 
+async function getMarketplace(nr = 1){
+    const offset = helper.getEasyset(nr);
+    const rows = await db.query(
+        `SELECT id, title, image, coins, amount FROM marketplace ORDER BY id DESC LIMIT 0, 10`
+    );
+    
+    const data = helper.emptyOrRows(rows);
+    const meta = {nr};
+
+    return {
+        data,
+        meta
+    }
+}
+
+async function getStore(nr = 1){
+    const offset = helper.getEasyset(nr);
+    const rows = await db.query(
+        `SELECT id, title, description, image, value FROM resources WHERE type = '3' ORDER BY id DESC LIMIT 0, 10`
+    );
+    
+    const data = helper.emptyOrRows(rows);
+    const meta = {nr};
+
+    return {
+        data,
+        meta
+    }
+}
+
+//POST
 async function sell(data){
     //console.log(data);
     const result = await db.query(
@@ -74,19 +105,25 @@ async function sell(data){
     return {message};
 }
 
-async function getMarketplace(nr = 1){
-    const offset = helper.getEasyset(nr);
-    const rows = await db.query(
-        `SELECT id, title, image, coins, amount FROM marketplace ORDER BY id DESC LIMIT 0, 10`
+async function consume(data){
+    //console.log(data);
+ 
+    const result = await db.query(
+        `UPDATE inventory 
+        SET amount = amount - ${data.amount} 
+        WHERE id = ${data.id_item} AND id_user = ${data.id_user}`
     );
     
-    const data = helper.emptyOrRows(rows);
-    const meta = {nr};
 
-    return {
-        data,
-        meta
+    let message = 'Error in consuming item';
+    
+    if (result.affectedRows) {
+        
+        message = `Item consumed`;
+        
     }
+
+    return {message};
 }
 
 module.exports = {
@@ -94,5 +131,7 @@ module.exports = {
     getMultiple,
     getMine,
     getItem,
+    getStore,
+    consume,
     sell
 }
