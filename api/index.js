@@ -5,7 +5,7 @@ const resources = require('../services/resources');
 
 app.use('/static', express.static('public'))
 
-app.get('/api', (req, res) => {
+app.get('/apiss', (req, res) => {
   const now = new Date().toUTCString();
   const path = `/api/item/${now}`;
   res.setHeader('Content-Type', 'text/html');
@@ -13,7 +13,7 @@ app.get('/api', (req, res) => {
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 });
 
-app.get('/api/resources', async function(req, res, next) {
+app.get('/api', async function(req, res, next) {
     try {
         res.json(await resources.getMultiple(1));
     } catch (err) {
