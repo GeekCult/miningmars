@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:dev": "tsc --watch --preserveWatchOutput",
-    "start:dev": "nodemon dist/index.js & webpack -w"
+        "start": "node index.js",
+        "build:dev": "tsc --watch --preserveWatchOutput",
+        "start:dev": "nodemon dist/index.js & webpack -w"
   },
   "keywords": [
     "axios",
