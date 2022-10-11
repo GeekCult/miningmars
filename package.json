@@ -11,7 +11,8 @@
   "scripts": {
     "start": "node index.js",
     "build:dev": "tsc --watch --preserveWatchOutput",
-    "start:dev": "nodemon dist/index.js & webpack -w"
+    "start:dev": "nodemon dist/index.js & webpack -w",
+    "build": "webpack --mode production"
   },
   "keywords": [
     "axios",
