@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.19.1"
+  },
+  
   "scripts": {
     "start": "node index.js",
     "build:dev": "tsc --watch --preserveWatchOutput",
