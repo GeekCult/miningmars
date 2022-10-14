@@ -160,7 +160,8 @@ export class MineManager {
     
     public fight = async (props: any): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "http://localhost:3000"
+        //const baseUrl: string = "http://localhost:3000"
+        const baseUrl: string = ""
         
         try {
             

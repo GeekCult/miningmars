@@ -27,7 +27,8 @@ const Fight = ({
     const sellItem = async (props: any): Promise<AxiosResponse> => {
         
         try{
-            const baseUrl: string = "http://localhost:3000"
+            //const baseUrl: string = "http://localhost:3000"
+            const baseUrl: string = ""
             
             // Send data to the backend via POST
             const sell = await axios.post(baseUrl + "/inventory/sell", {'id_item': props.id, 'id_user': 0, 'amount': props.amount, 'coins': props.coins, 'title': props.title, 'image': props.image} )
