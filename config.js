@@ -1,10 +1,11 @@
 const config = {
   db: {
     /* don't expose password or any sensitive info, done only for demo */
-    host: "mysql.kinghost.net",
+    host: "mysql02-farm10.kinghost.net",
     user: "mars",
     password: "S0mKl23gNec43",
-    database: "mars"
+    database: "mars",
+    port: 3306
   },
   db2: {
     /* don't expose password or any sensitive info, done only for demo */
