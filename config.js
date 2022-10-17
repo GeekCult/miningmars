@@ -5,7 +5,7 @@ const config = {
     user: "mars",
     password: "S0mKl23gNec43",
     database: "mars"
-  }
+  },
   
   listPerPage: 10
 };
