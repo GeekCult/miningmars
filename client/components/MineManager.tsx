@@ -13,7 +13,8 @@ export class MineManager {
     
     public mine = async (): Promise<AxiosResponse> => {
              
-        const baseUrl: string = "http://localhost:3000"
+        //const baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         try {   
             let nrItems = mineUtils.randomNumber(1, 1);
@@ -68,7 +69,8 @@ export class MineManager {
        
     public updateUser = async (props): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "http://localhost:3000"
+        //const baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         // Send data to the backend via POST
         const user = await axios.post(baseUrl + "/user/xp", {'xp': props.xp, 'coin': props.coin, 'stamina': props.stamina, 'id_user': 0} )
@@ -80,7 +82,8 @@ export class MineManager {
     
     public saveMine = async (): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "http://localhost:3000"
+        //const baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         let nrItems = mineUtils.randomNumber(1, 5);
 
         // Send data to the backend via POST
@@ -94,7 +97,8 @@ export class MineManager {
 
     public connect = async (props: any): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "https://miningmars.vercel.app"
+        //const baseUrl: string = "https://miningmars.vercel.app"
+        let baseUrl: string = ""
         
         try {
             //alert(props.Title);
@@ -136,7 +140,8 @@ export class MineManager {
     
     public inventory = async (props: any): Promise<AxiosResponse> => {
         
-        const baseUrl: string = "http://localhost:3000"
+        //const baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         try {
             
@@ -243,7 +248,8 @@ export class MineManager {
     public marketPlace = async (props: any): Promise<AxiosResponse> => {
 
         try {
-            const baseUrl: string = "http://localhost:3000"
+            //const baseUrl: string = "http://localhost:3000"
+            let baseUrl: string = ""
             
             const items: AxiosResponse = await axios.get(
               baseUrl + "/inventory/marketplace"

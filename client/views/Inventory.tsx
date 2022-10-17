@@ -27,7 +27,8 @@ const Inventory = ({
     const sellItem = async (props: any): Promise<AxiosResponse> => {
         
         try{
-            const baseUrl: string = "http://localhost:3000"
+            //const baseUrl: string = "http://localhost:3000"
+            let baseUrl: string = ""
             
             // Send data to the backend via POST
             const sell = await axios.post(baseUrl + "/inventory/sell", {'id_item': props.id, 'id_user': 0, 'amount': props.amount, 'coins': props.coins, 'title': props.title, 'image': props.image} )
@@ -50,7 +51,8 @@ const Inventory = ({
     
     const tradeIt = async (props: any): Promise<AxiosResponse> => {
         
-        let baseUrl: string = "http://localhost:3000"
+        //let baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         let item: AxiosResponse = await axios.get(
             baseUrl + "/inventory/item", {params: {nr: props.id}} 

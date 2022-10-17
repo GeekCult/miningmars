@@ -64,7 +64,8 @@ export class ConsumeManager {
     
     const saveQuery = async (rule: any): Promise<AxiosResponse> => {
         
-        let baseUrl: string = "http://localhost:3000"
+        //let baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         if(rule.action == 'user'){
             const user = await axios.post(baseUrl + rule.url, {'xp': rule.xp, 'coin': rule.coin, 'stamina': rule.stamina, 'id_user': 0} )

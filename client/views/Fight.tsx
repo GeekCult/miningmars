@@ -51,7 +51,8 @@ const Fight = ({
     
     const tradeIt = async (props: any): Promise<AxiosResponse> => {
         
-        let baseUrl: string = "http://localhost:3000"
+        //let baseUrl: string = "http://localhost:3000"
+        let baseUrl: string = ""
         
         let item: AxiosResponse = await axios.get(
             baseUrl + "/inventory/item", {params: {nr: props.id}} 

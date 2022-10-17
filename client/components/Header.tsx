@@ -87,7 +87,8 @@ const ConnectButton = ({
           const wallet = new BeaconWallet({
             name: "Mining Mars",
             iconUrl: '../imagens/xtz.png',
-            appUrl: "http://localhost:3000",
+            //appUrl: "http://localhost:3000",
+            appUrl: "http://mars.kinghost.net",
             preferredNetwork: NetworkType.HANGZHOUNET,
             disableDefaultEvents: true, // Disable all events / UI. This also disables the pairing alert.
             eventHandlers: {
