@@ -45,7 +45,7 @@ const Header_1 = ({
             <div className="banner r">
                 <img src="./imagens/banner.jpg" alt="banner"/>
                 <div className="cntContentBanner">
-                    <h2>30th Setember, 2087</h2>
+                    <h2>17th October, 2087</h2>
                     <p>Planet Mars</p>
                 </div>
             </div>
