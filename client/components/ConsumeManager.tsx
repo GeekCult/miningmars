@@ -4,7 +4,7 @@ import { toast } from "../components/ToastManager";
 
 export class ConsumeManager {
     
-    const consumeItem = async (item): Promise<void> => {
+    public consumeItem = async (item): Promise<void> => {
     //public consumeItem(item any){
         
         let rule = {}
@@ -38,9 +38,9 @@ export class ConsumeManager {
         return result;
     }
     
-    const executeQuery = async (rule: any): Promise<AxiosResponse> => {
+    public executeQuery = async (rule: any): Promise<AxiosResponse> => {
         
-        //let result = {}
+        let result2 = {}
         
         switch(rule.action){
                 
@@ -54,7 +54,7 @@ export class ConsumeManager {
                 break;
                 
             default:
-                result = {status: 'success', error: 0, message: 'Nothing happened'}
+                result2 = {status: 'success', error: 0, message: 'Nothing happened'}
                 break;
                 
         }
@@ -62,7 +62,7 @@ export class ConsumeManager {
         return result2
     }
     
-    const saveQuery = async (rule: any): Promise<AxiosResponse> => {
+    public saveQuery = async (rule: any): Promise<AxiosResponse> => {
         
         //let baseUrl: string = "http://localhost:3000"
         let baseUrl: string = ""
@@ -84,4 +84,4 @@ export class ConsumeManager {
     
 };
 
-export const consumeManager = new  ConsumeManager();
+export const consumeManager = new ConsumeManager();
