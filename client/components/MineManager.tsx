@@ -18,7 +18,7 @@ export class MineManager {
         
         try {   
             let nrItems = mineUtils.randomNumber(1, 1);
-            let userMine = {}
+            let userMine = {xp: 1, coin: 0, stamina: 1}
             //alert(nrItems);
 
             const recordSet: AxiosResponse = await axios.get(
