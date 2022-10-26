@@ -130,14 +130,14 @@ const App = () => {
             <div className="Action">
                 <div className="container">
                     <h2 className="txt-white"><span className="txt-orange">C</span>ool Actions</h2>
-                    <button className="btn btn-main mgR" onClick={transferIt}><i className="fa fa-wallet"></i> Transfer</button>
-                    <button className="btn btn-main mgR" onClick={connectIt}><i className="fa fa-star"></i> Resources</button>
-                    <button className="btn btn-main mgR" onClick={purchaseIt}><i className="fas fa-dollar-sign"></i> Purchase</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={transferIt}><i className="fa fa-wallet"></i> Transfer</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={connectIt}><i className="fa fa-star"></i> Resources</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={purchaseIt}><i className="fas fa-dollar-sign"></i> Purchase</button>
                     <button className="btn btn-main mgR hide" onClick={inspectIt}><i className="fas fa-receipt"></i> Inspect</button>
-                    <button className="btn btn-main mgR" onClick={inventoryIt}><i className="fas fa-receipt"></i> Inventory</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={inventoryIt}><i className="fas fa-receipt"></i> Inventory</button>
                     <button className="btn btn-main mgR hide" onClick={saveIt}><i className="fas fa-save"></i> Save</button>
-                    <button className="btn btn-main mgR" onClick={marketPlaceIt}><i className="fas fa-store"></i> MarketPlace</button>
-                    <button className="btn btn-main mgR" onClick={fightIt}><img src="./imagens/icon_swords.png" height="15"/> Fight</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={marketPlaceIt}><i className="fas fa-store"></i> MarketPlace</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={fightIt}><img src="./imagens/icon_swords.png" height="15"/> Fight</button>
                 </div>
             </div>
             <div className="Footer">

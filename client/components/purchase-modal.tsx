@@ -178,7 +178,7 @@ export const PurchaseModal: FunctionComponent<PurchaseModalProps> = (props) => {
     return (
       <React.Fragment>
           <StyledModal>
-                <div className="cflx center-flex gap-40 p-20">
+                <div className="cflx_resp center-flex gap-40 p-20">
                     <div className="fr2">
                         <img src={props.imageSrc} alt="Item"/>
                     </div>

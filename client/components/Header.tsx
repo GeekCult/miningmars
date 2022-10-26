@@ -202,7 +202,7 @@ const ConnectButton = ({
 
     return (
         <div className="buttons cflx center-flex">
-            <div className="txt-white mgR0"> { (userAddress === '') ? "" : userAddress } </div>
+            <div className="txt-white mgR0 hide_resp"> { (userAddress === '') ? "" : userAddress } </div>
             <button className={ (userAddress !== '') ? "hide" : 'btn btn-main' } onClick={connectTemple}>
                 <i className="fas fa-wallet"></i> Connect Wallet
             </button>

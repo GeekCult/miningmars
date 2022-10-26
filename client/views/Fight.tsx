@@ -13,10 +13,18 @@ const Fight = ({
   
 }): JSX.Element => {
     
-    const [ctnItems, setCtnItems] = useState<string>("");
-    const [ctnProfile, setCtnProfile] = useState<string>("active");
-    const [coins, setCoins] = useState<string>("1");
-    const [amount, setAmount] = useState<string>("1");
+    const [userPower, setUserPower] = useState<number>(5);
+    const [userDefense, setUserDefense] = useState<number>(3);
+    const [userLuck, setUserLuck] = useState<number>(1);
+    const [userLife, setUserLife] = useState<number>(10);
+    const [userTurn, setUserTurn] = useState<boolean>(true);
+    
+    const [enemyPower, setEnemyPower] = useState<number>(9);
+    const [enemyLife, setEnemyLife] = useState<number>(14);
+    const [enemyLuck, setEnemyLuck] = useState<number>(0);
+    const [enemyDefense, setEnemyDefense] = useState<number>(4);
+
+    const [statusModal, setStatusModal] = useState<string>('');
     
     //console.log(user);
     const closeOverScreen = function() {
@@ -24,70 +32,31 @@ const Fight = ({
         element.classList.remove("act");
     }
     
-    const sellItem = async (props: any): Promise<AxiosResponse> => {
+    
+    
+    const astronautAttack = async (props: any): Promise<AxiosResponse> => {
         
-        try{
-            //const baseUrl: string = "http://localhost:3000"
-            const baseUrl: string = ""
-            
-            // Send data to the backend via POST
-            const sell = await axios.post(baseUrl + "/inventory/sell", {'id_item': props.id, 'id_user': 0, 'amount': props.amount, 'coins': props.coins, 'title': props.title, 'image': props.image} )
-            .then(response => { 
-                toast.show({ title: response.data['message'], content: "", duration: 4000, mode: "success", image: ""});
-                return response.data; 
-            })
-            .catch(error => {  
-                toast.show({ title: error, content: "", duration: 4000, mode: "error", image: ""});
-                console.error('There was an error!', error); 
-            }); 
-        
-            
-            return sell;
-            
-        } catch (error: any) {
-            throw new Error(error);
+        if(userTurn){
+            setUserTurn(false);
+            let dano = userPower - enemyDefense;
+            if(dano < 0) dano = 0;
+            let life = enemyLife - dano;
+            setEnemyLife(life);
+            enemyAttack();
         }
     }
     
-    const tradeIt = async (props: any): Promise<AxiosResponse> => {
+ 
+    const enemyAttack = async (props: any): Promise<AxiosResponse> => {
+            
+        let dano = enemyPower - userDefense;
+        if(dano < 0) dano = 0;
+        let life = userLife - dano;
+        setUserLife(life);
+        setUserTurn(true);
         
-        //let baseUrl: string = "http://localhost:3000"
-        let baseUrl: string = ""
-        
-        let item: AxiosResponse = await axios.get(
-            baseUrl + "/inventory/item", {params: {nr: props.id}} 
-        )
-
-        //alert('oo');
-        let element = document.getElementById('overScreen2');
-        //console.log(props);
-        props.props.setContentOverScreen2(<Trade item={item.data.data}/>);
-        element.classList.add("act");
-        
-        return baseUrl;
     }
     
-    const runOk = function() {
-        try {
-            
-            console.log('ehrehr');
-            
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    
-    const handleTab = function(props: any) {
-        try {
-            setCtnProfile("");setCtnItems("");
-            
-            if(props.action == 'ctnItems'){setCtnItems("active");}
-            if(props.action == 'ctnProfile'){setCtnProfile("active");}
-            
-        } catch (error) {
-            console.log(error);
-        }
-    }
     
     const runIt = async (props: any): Promise<AxiosResponse> => {
          
@@ -112,43 +81,70 @@ const Fight = ({
                 
                 console.log(consumeIt);            
         }
+
+        //Runawayy
+        if(props.action == 'Flee'){
+            setStatusModal('active');
+        }
+
+        //Runawayy
+        if(props.action == 'RunAway'){
+            setStatusModal('');
+            closeOverScreen();
+        }
         
+        //Close Modal Fight
+        if(props.action == 'Cancel'){
+            setStatusModal('');
+        }
     }
     
     return (
         <div className="Fight centerView ctnFight">
-            <div className="btn-close pointer" onClick={closeOverScreen}><i className="fa fa-times"></i></div>
+            <div className="btn-close pointer hide" onClick={closeOverScreen}><i className="fa fa-times"></i></div>
             <h2 className="title titleUp">Fight</h2>
             
             <div id="ctnFight">
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 hide_resp">
                         <div className="ctnIn">
                             <div className="cflx center-flex">
                                 <img src="../imagens/ic_power_pp.png" alt="" height="15" className="mgR0"/>
-                                <div>5 Power</div>
+                                <div>{userPower} Power</div>
                             </div>
                             <div className="cflx center-flex">
                                 <img src="../imagens/ic_shield_pp.png" alt="" height="15" className="mgR0"/>
-                                <div>3 Defense</div>
+                                <div>{userDefense} Defense</div>
                             </div>
                             <div className="cflx center-flex">
                                 <img src="../imagens/ic_luck_pp.png" alt="" height="15" className="mgR0"/>
-                                <div>2 Luck</div>
+                                <div>{userLuck} Luck</div>
                             </div>
                             <div className="cflx center-flex">
                                 <img src="../imagens/ic_heart_pp.png" alt="" height="15" className="mgR0"/>
-                                <div>10 Life</div>
+                                <div>{userLife} Life</div>
                             </div>
                         </div>
                         <img src="../imagens/astronaut.png" alt="player1"/>
                     </div>
                     <div className="col-md-6">
                         <div className="ctnInRight">
-                            <div>Power 9</div>
-                            <div>Defense 4</div>
-                            <div>Luck 1</div>
-                            <div>Life 14</div>
+                            <div className="cflx center-flex justify-right">
+                                <div>Power {enemyPower}</div>
+                                <img src="../imagens/ic_power_pp.png" alt="" height="15" className="mgL0"/>
+                            </div>
+                            <div className="cflx center-flex justify-right">
+                                <div>Defense {enemyDefense}</div>
+                                <img src="../imagens/ic_shield_pp.png" alt="" height="15" className="mgL0"/>
+                            </div>
+                            <div className="cflx center-flex justify-right">
+                                <div>Luck {enemyLuck}</div>
+                                <img src="../imagens/ic_luck_pp.png" alt="" height="15" className="mgL0"/>
+                            </div>
+                            <div className="cflx center-flex justify-right">
+                                <div>Life {enemyLife}</div>
+                                <img src="../imagens/ic_heart_pp.png" alt="" height="15" className="mgL0"/>
+                            </div>
                         </div>
                         <img src="../imagens/monster.png" alt="player2" />
                     </div>
@@ -165,10 +161,10 @@ const Fight = ({
                                         <button className="btnFight btnFightL btn-block">Inventory</button>
                                     </div>
                                     <div className="fr1">
-                                        <button className="btnFight btnFightC btn-block">Attack</button>
+                                        <button className="btnFight btnFightC btn-block" onClick={astronautAttack}>Attack</button>
                                     </div>
                                     <div className="fr1">
-                                        <button className="btnFight btnFightR btn-block">Flee</button>
+                                        <button className="btnFight btnFightR btn-block" onClick={() => { runIt({action: 'Flee'});   }}>Flee</button>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +190,15 @@ const Fight = ({
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
+            <div className={'modalFight ' + statusModal }>
+                <div className='center'>
+                    <h3>Are you sure to flee?</h3>
+                    <p>You will lose some energy for this action</p>
+                    <button className='btn btn-second mgR' onClick={() => { runIt({action: 'Cancel'});   }}> Cancel</button>
+                    <button className='btn btn-main' onClick={() => { runIt({action: 'RunAway'});   }}> Flee</button>
+                </div>
+            </div>
         </div>
     );
 };

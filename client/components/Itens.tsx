@@ -65,7 +65,7 @@ const Itens = ({Tezos, setTezos, wallet}: ItemsProps): JSX.Element => {
                                     <div>0</div>
                                 </div>
                             </div>
-                            <button className="btn btn-orange" onClick={clickItem} data-src="./imagens/sinzel.png" data-id="1" data-title="Sinzel" data-price={v1}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
+                            <button className="btn btn-orange btn-block-apply" onClick={clickItem} data-src="./imagens/sinzel.png" data-id="1" data-title="Sinzel" data-price={v1}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
                         </div>
                     </div>
                     <div className="fr1">
@@ -93,7 +93,7 @@ const Itens = ({Tezos, setTezos, wallet}: ItemsProps): JSX.Element => {
                                     <div>0</div>
                                 </div>
                             </div>
-                            <button className="btn btn-orange" onClick={clickItem} data-src="./imagens/picareta.png" data-id="2" data-title="Pickaxe" data-price={v1 + 1}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
+                            <button className="btn btn-orange btn-block-apply" onClick={clickItem} data-src="./imagens/picareta.png" data-id="2" data-title="Pickaxe" data-price={v1 + 1}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
                         </div>
                     </div>
                     <div className="fr1">
@@ -121,7 +121,7 @@ const Itens = ({Tezos, setTezos, wallet}: ItemsProps): JSX.Element => {
                                     <div>1</div>
                                 </div>
                             </div>
-                            <button className="btn btn-orange" onClick={clickItem} data-src="./imagens/dinamite.png" data-id="3" data-title="Dinamite" data-price={v1 + 2} data-p="3" data-s="2" data-luck="1"><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
+                            <button className="btn btn-orange btn-block-apply" onClick={clickItem} data-src="./imagens/dinamite.png" data-id="3" data-title="Dinamite" data-price={v1 + 2} data-p="3" data-s="2" data-luck="1"><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
                         </div>
                     </div>
                     <div className="fr1">
@@ -149,7 +149,7 @@ const Itens = ({Tezos, setTezos, wallet}: ItemsProps): JSX.Element => {
                                     <div>1</div>
                                 </div>
                             </div>
-                            <button className="btn btn-orange" onClick={clickItem} data-src="./imagens/shovel.png" data-id="4" data-title="Shovel" data-price={v1 + 3}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
+                            <button className="btn btn-orange btn-block-apply" onClick={clickItem} data-src="./imagens/shovel.png" data-id="4" data-title="Shovel" data-price={v1 + 3}><i className="fa fa-shopping-cart mgR0"></i>Buy</button>
                         </div>
                     </div>
                 </div>
