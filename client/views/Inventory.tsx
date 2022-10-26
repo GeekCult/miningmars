@@ -15,6 +15,7 @@ const Inventory = ({
     
     const [ctnItems, setCtnItems] = useState<string>("");
     const [ctnProfile, setCtnProfile] = useState<string>("active");
+    const [ctnSpells, setCtnSpells] = useState<string>("");
     const [coins, setCoins] = useState<string>("1");
     const [amount, setAmount] = useState<string>("1");
     
@@ -79,10 +80,11 @@ const Inventory = ({
     
     const handleTab = function(props: any) {
         try {
-            setCtnProfile("");setCtnItems("");
+            setCtnProfile("");setCtnItems("");setCtnSpells("");
             
             if(props.action == 'ctnItems'){setCtnItems("active");}
             if(props.action == 'ctnProfile'){setCtnProfile("active");}
+            if(props.action == 'ctnSpells'){setCtnSpells("active");}
             
         } catch (error) {
             console.log(error);
@@ -117,46 +119,45 @@ const Inventory = ({
     
     return (
         <div className="Inventory centerView">
-            <div className="btn-close pointer" onClick={closeOverScreen}><i className="fa fa-times"></i></div>
+            <div className="btn-close pointer btnCloseOverScreen" onClick={closeOverScreen}><i className="fa fa-times"></i></div>
             <h2 className="title titleUp">Inventory</h2>
-            <div className="nav-horizontal">
-                <button className={ctnProfile} onClick={ () => { handleTab({action: 'ctnProfile'}) }} type="button">Profile</button> 
-                <button className={ctnItems} onClick={ () => { handleTab({action: 'ctnItems'}) }} type="button">Items</button>
-            </div>
-            
-            <div id="ctnProfile" className={ctnProfile}>
-                <div className="cflx">
-                    <div className="fr1 mgR2">
-                        <img src="../imagens/avatar.png" alt="avatar"/>
+            <div className="cflx mgB ctnProfile">
+                <div className="fr1 mgR0">
+                    <img src="../imagens/avatar.png" alt="avatar" height='100'/>
+                </div>
+                <div className="fr7">
+                    <h2 className="title mg0">Astronaut</h2>
+                    <div className="cflx">
+                        <p className="txt-white">Level: <b>1</b></p>
+                        <p className="txt-gray mgL2"> XP for next level: <b>999</b></p>
                     </div>
-                    <div className="fr6">
-                        <h2 className="title">Astronaut</h2>
-                        <div className="cflx">
-                            <p className="txt-white">Level: <b>1</b></p>
-                            <p className="txt-gray mgL2">XP for next level: <b>999</b></p>
+                    <div className="cflx">
+                        <div className="mgR2 cflx center-flex">
+                            <h4 className="title center mgR">XP</h4>
+                            <p className="txt-white">{user.xp}</p>
                         </div>
-                        <div className="cflx">
-                            <div className="mgR2 cflx center-flex">
-                                <h4 className="title center mgR">XP</h4>
-                                <p className="txt-white mg0">{user.xp}</p>
-                            </div>
-                            <div className="mgR2 cflx center-flex">
-                                <h4 className="title center mgR">Stamina</h4>
-                                <p className="txt-white mg0">{user.stamina}</p>
-                            </div>
-                            <div className="mgR2 cflx center-flex">
-                                <h4 className="title center mgR">Luck</h4>
-                                <p className="txt-white mg0">{user.luck}</p>
-                            </div>
-                            <div className="cflx center-flex">
-                                <h4 className="title center mgR">Coins</h4>
-                                <p className="txt-white mg0">{user.coin}</p>
-                                <img src="../imagens/ic_coin.png" alt="Coin" className="mgL" height="20"/>
-                            </div>
+                        <div className="mgR2 cflx center-flex">
+                            <h4 className="title center mgR">Energy</h4>
+                            <p className="txt-white">{user.stamina}</p>
+                        </div>
+                        <div className="mgR2 cflx center-flex">
+                            <h4 className="title center mgR">Luck</h4>
+                            <p className="txt-white">{user.luck}</p>
+                        </div>
+                        <div className="cflx center-flex">
+                            <h4 className="title center mgR">Coins</h4>
+                            <p className="txt-white">{user.coin}</p>
+                            <img src="../imagens/ic_coin.png" alt="Coin" className="mgL" height="20"/>
                         </div>
                     </div>
                 </div>
-                <h3 className="title mgT2">Equipment</h3>
+            </div>
+            <div className="nav-horizontal">
+                <button className={ctnProfile} onClick={ () => { handleTab({action: 'ctnProfile'}) }} type="button">Equipments</button> 
+                <button className={ctnItems} onClick={ () => { handleTab({action: 'ctnItems'}) }} type="button">Items</button>
+                <button className={ctnSpells} onClick={ () => { handleTab({action: 'ctnSpells'}) }} type="button">Spells</button>
+            </div>
+            <div id="ctnProfile" className={ctnProfile}>
                 <div className="cflx">
                     <div className="mgR2 slotItems">
                         <img src="../imagens/wood-spoon.png" alt="tool"/>
@@ -169,12 +170,11 @@ const Inventory = ({
                     </div>
                 </div>
                 <hr className="hrSpecial2"/>
-                
             </div>
             
             
-            <div id="ctnItems" className={ctnItems} style={{maxHeight: '400px', overflow: 'auto'}}>
-                { Object.keys(items.data.data).map((d)=>{ return(
+            <div id="ctnItems" className={ctnItems} style={{maxHeight: '460px', overflow: 'auto'}}>
+                { Object.keys(items.data.data).map((d)=>{ if(items.data.data[d].type == '1' && items.data.data[d].amount > 0){ return(
                 <div className="pp_square_black cflx gap-10 center-flex" key={items.data.data[d].id}>
                     <div className="fr1 mgR2">
                         <img src={"./imagens/" + items.data.data[d].image} height="40" className="mgR2"/>
@@ -189,10 +189,43 @@ const Inventory = ({
                         <button className="btn btn-red btn-sm" onClick={() => { runIt({item: items.data.data[d], props: props, action: 'Delete'});   }}> <i className="fa fa-times"></i></button>
                     </div>
                 </div>
-                ) }) 
+                ) }}) 
                 }
             </div>
-            
+            <div id="ctnSpells" className={ctnSpells} style={{maxHeight: '460px', overflow: 'auto'}}>
+                <div className="row">
+                    { Object.keys(items.data.data).map((d)=>{ if(items.data.data[d].type == '3' && items.data.data[d].amount > 0){ return(
+                    <div className="col-md-6" key={items.data.data[d].id}>
+                        <div className="pp_square_black cflx gap-10 center-flex" key={items.data.data[d].id}>
+                            <div className="cflx">
+                                <div className="fr2">
+                                    <img src={"./imagens/" + items.data.data[d].image} height="120" className="mgR2"/>
+                                </div>
+                                <div className="fr4">
+                                    <div className="cflxss">
+                                        <div className="fr1">
+                                            <h3 className="title mg0">{items.data.data[d].title}</h3>
+                                            <p className="paragraph txt-white" style={ {height: '50px'} }>{items.data.data[d].description}</p>
+                                        </div>
+                                        <div className="fr1 cflx center-flex">
+                                            <div className="fr1">
+                                                <button className="btn btn-success" onClick={() => { runIt({item: items.data.data[d], props: props, action: 'Buy'}); } }><i className="fa fa-shopping-cart"></i> Buy</button>
+                                            </div>
+                                            <div className="cflx fr1 justify-right">
+                                                <img src="../imagens/ic_coin.png" alt="" height="20"/>
+                                                <div className="mgL txt-white">{items.data.data[d].value}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ) }}) 
+                    }
+                </div>
+            </div>
         </div>
     );
 };

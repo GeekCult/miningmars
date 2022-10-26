@@ -6,7 +6,7 @@ async function getMultiple(page = 1){
     
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(
-        `SELECT A.id, A.id_item, A.amount, B.title, B.image  FROM inventory AS A INNER JOIN resources AS B ON B.id = A.id_item ORDER BY B.title ASC LIMIT ${offset},100`
+        `SELECT A.id, A.id_item, A.amount, B.title, B.image, B.type, B.description  FROM inventory AS A INNER JOIN resources AS B ON B.id = A.id_item ORDER BY B.title ASC LIMIT ${offset},100`
     );
     const data = helper.emptyOrRows(rows);
     const meta = {page};
