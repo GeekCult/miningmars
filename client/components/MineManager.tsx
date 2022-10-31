@@ -4,6 +4,7 @@ import Trade from "../views/Trade";
 import Marketplace from "../views/Marketplace";
 import Inventory from "../views/Inventory";
 import Fight from "../views/Fight";
+import Login from "../components/Login";
 import { toast } from "../components/ToastManager";
 
 import { mineUtils } from "../components/MineUtils";
@@ -92,6 +93,14 @@ export class MineManager {
             .catch(error => {  toast.show({ title: 'There was an error!' + error,  content: "",  duration: 4000, mode: 'error', image: "" }); console.error('There was an error!', error); }); 
 
         return mineResult;
+    };
+
+    public loginUser = async (props): Promise<AxiosResponse> => {
+        
+        props.setTitleModal('Signin');
+        props.setContentModal( <Login props={props}/>) );
+
+        props.toggle();
     };
      
 

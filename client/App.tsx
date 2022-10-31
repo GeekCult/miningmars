@@ -81,6 +81,10 @@ const App = () => {
     const saveIt = function() {
         const result = mineManager.saveMine();
     }
+
+    const signIt = function() {
+        const result = mineManager.loginUser({ Modal: Modal, toggle: toggle, setTitleModal: setTitleModal, setContentModal: setContentModal, setContentOverScreen: setContentOverScreen, setContentOverScreen2: setContentOverScreen2, toast: toast });
+    }
     
     const inspectIt = function() {
         const result = tezosManager.inspectContract({ Tezos: Tezos,  wallet: wallet });
@@ -137,6 +141,7 @@ const App = () => {
                     <button className="btn btn-main mgR mgB btn-block-apply" onClick={inventoryIt}><i className="fas fa-receipt"></i> Inventory</button>
                     <button className="btn btn-main mgR hide" onClick={saveIt}><i className="fas fa-save"></i> Save</button>
                     <button className="btn btn-main mgR mgB btn-block-apply" onClick={marketPlaceIt}><i className="fas fa-store"></i> MarketPlace</button>
+                    <button className="btn btn-main mgR mgB btn-block-apply" onClick={signIt}><i className="fas fa-user"></i> Login</button>
                     <button className="btn btn-main mgR mgB btn-block-apply" onClick={fightIt}><img src="./imagens/icon_swords.png" height="15"/> Fight</button>
                 </div>
             </div>

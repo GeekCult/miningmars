@@ -39,7 +39,7 @@ const Itens = ({Tezos, setTezos, wallet}: ItemsProps): JSX.Element => {
         <div className="Itens">
             <div className="container">
                 <h2 className="txt-white"><span className="txt-orange">C</span>hoose your tool</h2>
-                <div className='cflx mgT2 gap-20'>
+                <div className='cflx mgT2 gap-20 cntItensDash'>
                     <div className="fr1">
                         <div className="pp_square_dark">
                             <img src="./imagens/sinzel.png" alt="item" />

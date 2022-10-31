@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 700;
-  width: inherit;
-  outline: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 700;
+    width: inherit;
+    outline: 0;
+
+    @media (max-width: 480px) {
+        padding: 0 15px;
+    }
 `;
 
 export const Backdrop = styled.div`
@@ -21,13 +25,16 @@ export const Backdrop = styled.div`
 `;
 
 export const StyledModal = styled.div`
-  z-index: 100;
-  width: auto;
-  background: white;
-  position: relative;
-  margin: auto;
-  border-radius: 8px;
-  display: table;
+    z-index: 100;
+    width: auto;
+    background: white;
+    position: relative;
+    margin: auto;
+    border-radius: 8px;
+    display: table;
+    @media (max-width: 480px) {
+        width: 100%;
+    }
 `;
 
 export const Header = styled.div`

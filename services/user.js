@@ -50,7 +50,26 @@ async function updateConsume(data){
     
     if (result.affectedRows) {
         //console.log(data);
-        message = `User updated successfully`;
+        message = `Item consumed`;
+        error = 0; status = "success";
+        
+    }
+
+    return {message, status, error};
+}
+
+async function saveUser(data){
+  
+    const result = await db.query(
+        `INSERT INTO user_data (name) VALUES ('${data.name}')`
+    );
+    
+    let error = 1; let status = 'error';
+    let message = 'Error in inserting user';
+    
+    if (result.affectedRows) {
+        //console.log(data);
+        message = `User created successfully`;
         error = 0; status = "success";
         
     }
@@ -61,5 +80,6 @@ async function updateConsume(data){
 module.exports = {
     updateConsume,
     getMe,
-    updateXp
+    updateXp,
+    saveUser
 }

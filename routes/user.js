@@ -34,4 +34,15 @@ router.post('/consume', async function(req, res, next) {
     }
 });
 
+/* POST Save user */
+router.post('/save', async function(req, res, next) {
+    try {
+
+        res.json(await user.saveUser(req.body));
+    } catch (err) {
+        console.error(`Error while save user`, err.message);
+        next(err);
+    }
+});
+
 module.exports = router;

@@ -103,10 +103,10 @@ const Marketplace = ({
                 <div className="row">
                     { Object.keys(store.data.data).map((d)=>{ return(
                     <div className="col-md-6" key={store.data.data[d].id}>
-                        <div className="pp_square_black">
-                            <div className="cflx">
+                        <div className="pp_square_black ">
+                            <div className="cflx gap-10">
                                 <div className="fr2">
-                                    <img src={"./imagens/" + store.data.data[d].image} height="120" className="mgR2"/>
+                                    <img src={"./imagens/" + store.data.data[d].image} className="mgR2 picMarketPlace"/>
                                     
                                 </div>
                                 <div className="fr4">

@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/css/modal.style.tsx</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/components/MineManager.tsx</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/components/Modal.tsx</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/public/style.css</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/views/Marketplace.tsx</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/components/Itens.tsx</file>
+            <file>file:/Applications/MAMP/htdocs/mars4/client/App.tsx</file>
+        </group>
     </open-files>
 </project-private>
