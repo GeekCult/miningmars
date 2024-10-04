@@ -1,23 +1,22 @@
-const db = require('./db');
-const helper = require('../helper');
-const config = require('../config');
+const db = require("./db");
+const helper = require("../helper");
+const config = require("../config");
 
-async function getMultiple(page = 1){
-    
-    const offset = helper.getOffset(page, config.listPerPage);
-    
-    const rows = await db.query(
-        `SELECT * 
+async function getMultiple(page = 1) {
+  const offset = helper.getOffset(page, config.listPerPage);
+
+  const rows = await db.query(
+    `SELECT * 
         FROM resources LIMIT ${offset}, 100`
-    );
-    
-    const data = helper.emptyOrRows(rows);
-    const meta = {page};
+  );
 
-    return {
-        data,
-        meta
-    }
+  const data = helper.emptyOrRows(rows);
+  const meta = { page };
+
+  return {
+    data,
+    meta,
+  };
 }
 
 const getCircularReplacer = () => {
@@ -33,35 +32,33 @@ const getCircularReplacer = () => {
   };
 };
 
-async function create(data){
-  
-    const result = await db.query(
-        `UPDATE inventory 
+async function create(data) {
+  const result = await db.query(
+    `UPDATE inventory 
         SET amount = amount + ${data.amount} 
         WHERE id_item = ${data.id_item} AND id_user = ${data.id_user}`
-    );
-    
-    if (!result.affectedRows) {
-        const result = await db.query(
-            `INSERT INTO inventory 
+  );
+
+  if (!result.affectedRows) {
+    const result = await db.query(
+      `INSERT INTO inventory 
             (id_item, id_user, amount) 
             VALUES 
             (${data.id_item}, ${data.id_user}, ${data.amount})`
-        );
-    }
+    );
+  }
 
-    let message = 'Error in adding inventory';
-    
-    if (result.affectedRows) {
-        //console.log(data);
-        message = `Inventory added successfully: ${data.id_item}`;
-        
-    }
+  let message = "Error in adding inventory";
 
-    return {message};
+  if (result.affectedRows) {
+    //console.log(data);
+    message = `Inventory added successfully: ${data.id_item}`;
+  }
+
+  return { message };
 }
 
 module.exports = {
-    getMultiple,
-    create
-}
+  getMultiple,
+  create,
+};
