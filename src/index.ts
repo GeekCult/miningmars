@@ -38,7 +38,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   return;
 }); 
 
-const PORT = process.env.PORT || 21094;
+const PORT = process.env.PORT || 80;
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
